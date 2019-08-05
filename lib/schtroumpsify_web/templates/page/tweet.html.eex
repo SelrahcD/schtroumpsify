@@ -1,0 +1,14 @@
+<li class="flex mb-3">
+	<div class="p-5 m-3 bg-white w-1/2 border-gray-200 border rounded shadow-md">
+		<%= @tweet %>
+	</div>
+
+	<div class="p-5 m-3 bg-white w-1/2 border-gray-200 border rounded shadow-md">
+		<div class="card-title loading h-10 mb-3 overflow-hidden"></div>
+		<div class="card-title loading h-10 overflow-hidden"></div>
+	</div>
+
+
+</li>
+
+
