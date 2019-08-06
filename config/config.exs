@@ -22,6 +22,35 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+twitter_consummer_key = System.get_env("TWITTER_CONSUMER_KEY") ||
+  raise """
+  environment variable TWITTER_CONSUMER_KEY is missing.
+  """
+
+twitter_consummer_secret = System.get_env("TWITTER_CONSUMER_SECRET") ||
+  raise """
+  environment variable TWITTER_CONSUMER_SECRET is missing.
+  """
+
+twitter_access_token = System.get_env("TWITTER_ACCESS_TOKEN") ||
+  raise """
+  environment variable TWITTER_ACCESS_TOKEN is missing.
+  """
+
+twitter_access_token_secret = System.get_env("TWITTER_ACCESS_TOKEN_SECRET") ||
+  raise """
+  environment variable TWITTER_ACCESS_TOKEN_SECRET is missing.
+  """
+
+
+config :extwitter, :oauth, [
+  consumer_key: twitter_consummer_key,
+  consumer_secret: twitter_consummer_secret,
+  access_token: twitter_access_token,
+  access_token_secret: twitter_access_token_secret
+]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
+
