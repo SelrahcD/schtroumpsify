@@ -12,7 +12,8 @@ defmodule Schtroumpsify.Application do
       SchtroumpsifyWeb.Endpoint,
       {Schtroumpsify.TweetStates, []},
       {Schtroumpsify.TweetListener, []},
-      {SchtroumpsifyWeb.TweetEventListener, []}
+      {SchtroumpsifyWeb.TweetEventListener, []},
+      {Schtroumpsify.FlowsSupervisors, strategy: :one_for_one, name: Schtroumpsify.FlowsSupervisors}
       # Starts a worker by calling: Schtroumpsify.Worker.start_link(arg)
       # {Schtroumpsify.Worker, arg},
     ]

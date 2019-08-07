@@ -22,9 +22,9 @@ defmodule Schtroumpsify.TweetListener do
     Logger.debug("Start listening...")
 
     ExTwitter.stream_filter(follow: "24744541")
-        |> Stream.filter(fn tweet -> tweet.user.id == 24744541 && tweet.retweeted_status == nil end)
-        |> Stream.map(fn x -> IO.inspect(x) end)
-        |> Stream.filter(fn tweet -> Schtroumpsify.TweetStates.addTweet(tweet.text) end)
+#        |> Stream.filter(fn tweet -> tweet.user.id == 24744541 && tweet.retweeted_status == nil end)
+        |> Stream.map(&Schtroumpsify.FlowsSupervisors.startFlow/1)
+#        |> Stream.filter(fn tweet -> Schtroumpsify.TweetStates.addTweet(tweet.text) end)
           #    |> Stream.map(fn x -> %IncomingTweet{id: x.id, content: x.text} end)
           #    |> Stream.map(fn x -> Schtroumpsify.FlowSupervisor.startFlow end)
         |> Stream.run()
