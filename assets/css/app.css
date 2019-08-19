@@ -1,8 +1,6 @@
 
 /* This file is for your main application css. */
 
-@import "./phoenix.css";
-
 @tailwind base;
 
 @tailwind components;
@@ -10,25 +8,81 @@
 @tailwind utilities;
 
 .loading {
-    position: relative;
+position: relative;
     @apply bg-gray-200
 }
 .loading.card-image {
     border-radius: 0;
 }
 .loading::after {
-    display: block;
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transform: translateX(-100%);
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .4), transparent);
-    animation: loading 1.5s infinite;
+display: block;
+content: '';
+position: absolute;
+width: 100%;
+height: 100%;
+transform: translateX(-100%);
+background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .4), transparent);
+animation: loading 1.5s infinite;
 }
 @keyframes loading {
-    100% {
-        transform: translateX(100%);
-    }
+100% {
+transform: translateX(100%);
+}
 }
 
+.done{
+    fill:#4299e1;
+}
+
+.waiting {
+    fill: #718096
+}
+
+.step-logo {
+    @apply h-10 w-10
+}
+
+.credit {
+    height:300px;
+    width:300px;
+    border-top:30px solid #c4268c;
+    background:#000;
+    position:relative;
+    margin:1em;
+}
+.credit:first-child:before {
+    content:'';
+    position:absolute;
+    width:100%;
+    height:30px;
+    background:linear-gradient(to left, red, green);
+    top:-30px;
+    left:0;
+}
+
+
+.bordertest {
+    height:300px;
+    width:300px;
+    border-top:30px solid #c4268c;
+    background:#000;
+    position:relative;
+    margin:1em;
+}
+.bordertest:first-child:before {
+    content:'';
+    position:absolute;
+    width:100%;
+    height:30px;
+    background:linear-gradient(to left, red, green);
+    top:-30px;
+    left:0;
+}
+
+footer a {
+    @apply underline
+}
+
+footer a:hover {
+    @apply no-underline
+}

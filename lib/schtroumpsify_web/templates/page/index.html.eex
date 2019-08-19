@@ -1,13 +1,13 @@
-<div class="container flex justify-center">
+<div class="flex justify-center">
 
   <ul id="tweets" class="w-4/5">
   <%= for tweet <- @tweets do %>
-  	<%= render("tweet.html", tweet: tweet) %>
+  	<%= render("tweet.html", tweet: tweet, conn: @conn) %>
   <% end %>
   </ul>
 
 </div>
 
 <script id="template-tweet-item" type="text/template">
-  <%= render("tweet.html", tweet: "{{tweet}}") %>
+  <%= render("tweet.html", tweet: "{{tweet}}", conn: @conn) %>
 </script>

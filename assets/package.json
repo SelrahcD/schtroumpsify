@@ -3,8 +3,8 @@
   "description": " ",
   "license": "MIT",
   "scripts": {
-    "deploy": "../node_modules/.bin/webpack --mode production",
-    "watch": "../node_modules/.bin/webpack --mode development --watch"
+    "deploy": "webpack --mode production",
+    "watch": "webpack --mode development --watch"
   },
   "dependencies": {
     "phoenix": "file:../deps/phoenix",
@@ -15,8 +15,11 @@
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "babel-loader": "^8.0.0",
-    "copy-webpack-plugin": "^4.5.0",
+    "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^2.1.1",
+    "extract-loader": "^3.1.0",
+    "file-loader": "^4.2.0",
+    "html-loader": "^0.5.5",
     "mini-css-extract-plugin": "^0.4.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-loader": "^3.0.0",

@@ -6,13 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Schtroumpsify · Phoenix Framework</title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
   </head>
-  <body class="bg-gray-200 font-sans text-gray-800">
-    <main role="main" class="container py-10">
+  <body class="bg-blue-100 text-gray-800 font-body">
+
+    <main role="main" class="p-5">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
       <%= render @view_module, @view_template, assigns %>
     </main>
+
+    <footer class="bg-blue-500 text-sm text-blue-100">
+		<div class="p-5 flex flex-col md:flex-row shadow-inner justify-center">
+			<div class="lg:w-1/3 p-5 md:border-r border-blue-700">
+				<div class="uppercase font-semibold tracking-wider mb-3 text-blue-200">What is this?</div>
+				<div>
+					<p class="mb-3">
+						Would it be possible to make <a href="https://twitter.com/lemondefr">all tweets from Le Monde</a>, one of the main french newspapers, accessible to
+						Smurfs ?
+					</p>
+					<p>
+						That question deserved an answer so here is an experiment of translating french tweets to
+						french smurf language, or <span class="italic">langue schtroumpf</span>, realtime and giving Smurfs
+						an access to the world through <a href="https://twitter.com/leschtroumpffr">a dedicated twitter account</a>.
+					</p>
+				</div>
+			</div>
+			<div class="lg:w-1/3 p-5 md:border-l border-blue-400">
+				<div class="uppercase font-semibold tracking-wider mb-5 text-blue-200">How does it work?</div>
+				<div>
+					<p class="mb-3">
+						We subscribed to tweets from Le Monde and used the <a href="https://www.rocq.inria.fr/alpage-wiki/tiki-index.php?page=alpc&bl=y">Alpage toolchain</a>,
+						developed by the INRIA, to parse the incoming tweets in order to obtain a syntactical analysis of the tweet content.
+					</p>
+					<p class="mb-3">
+					Then we created a new tweet based on the type of words contained in the tweet and a
+					dictionary of possible modification
+					</p>
+					<p class="mb-3">
+					... and tweeted it!
+					</p>
+					<p>
+					Feel free to dig in <a href="">the source code on Github</a>.
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="flex justify-center flex-row pb-4">
+			<div>Made by <a href="https://twitter.com/selrahcd">@Selrahcd</a></div>
+		</div>
+	</footer>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.slim.js"></script>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>

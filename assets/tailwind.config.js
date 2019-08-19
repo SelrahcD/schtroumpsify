@@ -1,6 +1,10 @@
 module.exports = {
   theme: {
-    extend: {}
+      fontFamily: {
+          body: ['Lato', 'sans-serif']
+      },
+    extend: {
+    }
   },
   variants: {},
   plugins: []

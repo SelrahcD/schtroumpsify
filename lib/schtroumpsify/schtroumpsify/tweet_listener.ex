@@ -3,6 +3,7 @@ require Logger
 defmodule Schtroumpsify.TweetListener do
   @moduledoc false
   use GenServer
+  alias Schtroumpsify.FlowsSupervisors
 
   def start_link() do
     GenServer.start_link(__MODULE__, [])
@@ -14,7 +15,7 @@ defmodule Schtroumpsify.TweetListener do
   end
 
   def startListening() do
-    GenServer.cast(self, :start_listening)
+    GenServer.cast(self(), :start_listening)
   end
 
   def handle_cast(:start_listening, state) do
@@ -22,14 +23,10 @@ defmodule Schtroumpsify.TweetListener do
     Logger.debug("Start listening...")
 
     ExTwitter.stream_filter(follow: "24744541")
-#        |> Stream.filter(fn tweet -> tweet.user.id == 24744541 && tweet.retweeted_status == nil end)
-        |> Stream.map(&Schtroumpsify.FlowsSupervisors.startFlow/1)
-#        |> Stream.filter(fn tweet -> Schtroumpsify.TweetStates.addTweet(tweet.text) end)
-          #    |> Stream.map(fn x -> %IncomingTweet{id: x.id, content: x.text} end)
-          #    |> Stream.map(fn x -> Schtroumpsify.FlowSupervisor.startFlow end)
+        |> Stream.map(&FlowsSupervisors.startFlow/1)
         |> Stream.run()
 
-    {:no_reply, state, state}
+    {:noreply, state}
   end
 
   def child_spec(_arg) do
