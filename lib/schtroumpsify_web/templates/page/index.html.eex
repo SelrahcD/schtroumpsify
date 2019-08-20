@@ -1,6 +1,6 @@
 <div class="flex justify-center">
 
-  <ul id="tweets" class="w-4/5">
+  <ul id="tweets" class="xlg:w-4/5">
   <%= for tweet <- @tweets do %>
   	<%= render("tweet.html", tweet: tweet, conn: @conn) %>
   <% end %>

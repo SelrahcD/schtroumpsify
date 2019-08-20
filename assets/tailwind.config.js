@@ -6,6 +6,9 @@ module.exports = {
     extend: {
     }
   },
-  variants: {},
+    variants: {
+        borderWidth: ['responsive', 'last', 'first'],
+        borderColor: ['responsive', 'last', 'first'],
+    },
   plugins: []
 }

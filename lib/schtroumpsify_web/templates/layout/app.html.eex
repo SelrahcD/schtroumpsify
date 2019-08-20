@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
   <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
   </head>
-  <body class="bg-blue-100 text-gray-800 font-body">
+  <body class="bg-blue-100 text-gray-800 font-body flex flex-col h-full">
 
-    <main role="main" class="p-5">
+    <main role="main" class="p-5 flex-grow">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
       <%= render @view_module, @view_template, assigns %>
@@ -32,7 +32,7 @@
 					</p>
 				</div>
 			</div>
-			<div class="lg:w-1/3 p-5 md:border-l border-blue-400">
+			<div class="md:w-1/3 p-5 md:border-l border-blue-400">
 				<div class="uppercase font-semibold tracking-wider mb-5 text-blue-200">How does it work?</div>
 				<div>
 					<p class="mb-3">

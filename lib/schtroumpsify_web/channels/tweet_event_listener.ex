@@ -11,7 +11,7 @@ defmodule SchtroumpsifyWeb.TweetEventListener do
   end
 
   def init(args) do
-    {:consumer, :the_state_does_not_matter, subscribe_to: [{Schtroumpsify.TweetStates, max_demand: 10}]}
+    {:consumer, :the_state_does_not_matter, subscribe_to: [Schtroumpsify.TweetStates]}
   end
 
   def handle_events(events, _from, state) do

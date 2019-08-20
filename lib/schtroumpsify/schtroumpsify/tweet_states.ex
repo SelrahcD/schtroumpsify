@@ -20,7 +20,7 @@ defmodule Schtroumpsify.TweetStates do
   def handle_cast({:add, content}, state) do
     event = {:new_tweet, content}
     IO.inspect(event)
-    {:noreply, [event], %{tweets: [content] ++ state.tweets}}
+    {:noreply, [event], %{state | tweets: [content] ++ state.tweets}}
   end
 
   def listAll() do
@@ -32,10 +32,11 @@ defmodule Schtroumpsify.TweetStates do
   end
 
   def handle_demand(demand, state) do
+    IO.inspect(demand)
     {:noreply, [], state}
   end
 
-  def child_spec(arg) do
+  def child_spec(_arg) do
     %{
       id: TweetStates,
       start: {__MODULE__, :start_link, [[], []]}
