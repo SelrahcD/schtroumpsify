@@ -3,7 +3,7 @@ defmodule Schtroumpsify.FlowsSupervisors do
   use DynamicSupervisor
 
   def start_link(init_arg) do
-    DynamicSupervisor.start_link(__MODULE__, init_arg, name: __MODULE__)
+    DynamicSupervisor.start_link(__MODULE__, strategy: :one_for_one, name: __MODULE__)
   end
 
   @impl true
