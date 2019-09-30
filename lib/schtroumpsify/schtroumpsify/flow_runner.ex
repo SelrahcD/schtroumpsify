@@ -22,8 +22,11 @@ defmodule Schtroumpsify.FlowRunner do
   @impl true
   def handle_cast({:compute_tweet, tweet}, state) do
     TweetStatesServer.addUsing(fn -> Tweet.from(tweet) end)
+    Process.sleep(1000)
     TweetStatesServer.modify(tweet, &Tweet.markAsParsed(&1))
+    Process.sleep(1000)
     TweetStatesServer.modify(tweet, &Tweet.addNewText(&1, "YOLO"))
+    Process.sleep(1000)
     TweetStatesServer.modify(tweet, &Tweet.markAsRetweeted(&1))
 
     {:stop, :normal, state}

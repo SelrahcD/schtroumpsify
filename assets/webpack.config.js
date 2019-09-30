@@ -6,6 +6,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const devMode = process.env.NODE_ENV !== 'production';
 const PurgecssPlugin = require('purgecss-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
 
 
 class TailwindExtractor {
@@ -62,13 +63,23 @@ module.exports = (env, options) => ({
                 ]
             },
             {
-                test: /\.(woff|woff2|eot|ttf|otf)$/,
-                loader: "file-loader"
+                test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
+                loader: "file-loader",
+                options: {
+                    outputPath: "css",
+                    publicPath: "../css"
+                }
             }
         ]
     },
     plugins: [
         new MiniCssExtractPlugin({ filename: './css/app.css' }),
-        new CopyPlugin([{ from: "./static/images", to: "images" }])
+        new CopyPlugin([{ from: "./static/images", to: "images" }]),
+        new ImageminPlugin({
+            // disable: process.env.NODE_ENV !== 'production', // Disable during development
+            pngquant: {
+                quality: '45-50'
+            }
+        })
     ]
 });
