@@ -4,13 +4,6 @@
 # remember to add this file to your .gitignore.
 use Mix.Config
 
-database_url =
-  System.get_env("DATABASE_URL") ||
-    raise """
-    environment variable DATABASE_URL is missing.
-    For example: ecto://USER:PASS@HOST/DATABASE
-    """
-
 secret_key_base =
   System.get_env("SECRET_KEY_BASE") ||
     raise """
@@ -19,7 +12,7 @@ secret_key_base =
     """
 
 config :schtroumpsify, SchtroumpsifyWeb.Endpoint,
-  http: [:inet6, port: String.to_integer(System.get_env("PORT") || "4000")],
+  http: [:inet6, port: String.to_integer(System.get_env("PORT") || "4000"), compress: true],
   secret_key_base: secret_key_base
 
 # ## Using releases (Elixir v1.9+)

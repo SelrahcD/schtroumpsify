@@ -6,20 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Schtroumpsify · Phoenix Framework</title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
-    <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
   </head>
-  <body class="bg-blue-100 text-gray-800 font-body flex flex-col h-full">
+  <body class="bg-blue-100 text-gray-800 font-body flex flex-col h-full border-t-4 border-schtroumpf-blue-600">
 
     <main role="main" class="p-5 flex-grow">
+    	<div class="flex justify-center">
+			  <img class="w-20 h-20 rounded-full shadow-inner" src="<%= Routes.static_path(@conn, "/images/logo.png") %>" alt="Avatar of Jonathan Reinink">
+		</div>
+
+
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
       <%= render @view_module, @view_template, assigns %>
     </main>
 
-    <footer class="bg-blue-500 text-sm text-blue-100">
+    <footer class="bg-schtroumpf-blue-700 text-sm text-blue-100">
 		<div class="p-5 flex flex-col md:flex-row shadow-inner justify-center">
-			<div class="lg:w-1/3 p-5 md:border-r border-blue-700">
-				<div class="uppercase font-semibold tracking-wider mb-3 text-blue-200">What is this?</div>
+			<div class="md:w-1/3 p-5 md:border-r border-blue-700">
+				<div class="uppercase font-semibold tracking-wider mb-3 text-blue-200 text-lg">What is this?</div>
 				<div>
 					<p class="mb-3">
 						Would it be possible to make <a href="https://twitter.com/lemondefr">all tweets from Le Monde</a>, one of the main french newspapers, accessible to
@@ -33,7 +37,7 @@
 				</div>
 			</div>
 			<div class="md:w-1/3 p-5 md:border-l border-blue-400">
-				<div class="uppercase font-semibold tracking-wider mb-5 text-blue-200">How does it work?</div>
+				<div class="uppercase font-semibold tracking-wider mb-5 text-blue-200 text-lg">How does it work?</div>
 				<div>
 					<p class="mb-3">
 						We subscribed to tweets from Le Monde and used the <a href="https://www.rocq.inria.fr/alpage-wiki/tiki-index.php?page=alpc&bl=y">Alpage toolchain</a>,

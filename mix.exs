@@ -42,7 +42,7 @@ defmodule Schtroumpsify.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:gen_stage, "~> 0.14"},
       {:oauther, "~> 1.1"},
-      {:extwitter, "~> 0.8"}
+      {:extwitter, "~> 0.9.5"}
     ]
   end
 

@@ -1,6 +1,6 @@
 <div class="flex justify-center">
 
-  <ul id="tweets" class="xlg:w-4/5">
+  <ul id="tweets" class="xlg:w-4/5 xs:w-10/12 md:w-3/5 sm:w-4/5">
   <%= for tweet <- @tweets do %>
   	<%= render("tweet.html", tweet: tweet, conn: @conn) %>
   <% end %>
@@ -9,5 +9,5 @@
 </div>
 
 <script id="template-tweet-item" type="text/template">
-  <%= render("tweet.html", tweet: "{{tweet}}", conn: @conn) %>
+  <%= render("tweet.html", tweet: %{id: '{{id}}', text: '{{text}}', schtroumpsified_text: ""}, conn: @conn) %>
 </script>

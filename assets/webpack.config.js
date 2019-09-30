@@ -5,6 +5,8 @@ const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const devMode = process.env.NODE_ENV !== 'production';
 const PurgecssPlugin = require('purgecss-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+
 
 class TailwindExtractor {
     static extract(content) {
@@ -18,15 +20,15 @@ module.exports = (env, options) => ({
         minimizer: [
             new TerserPlugin({ cache: true, parallel: true, sourceMap: devMode }),
             new OptimizeCSSAssetsPlugin({}),
-            // new PurgecssPlugin({
-            //     paths: glob.sync('../lib/schtroumpsify_web/templates/**/*.html.eex'),
-            //     extractors: [
-            //         {
-            //             extractor: TailwindExtractor,
-            //             extensions: ['html', 'js', 'eex'],
-            //         },
-            //     ],
-            // }),
+            new PurgecssPlugin({
+                paths: glob.sync('../lib/schtroumpsify_web/templates/**/*.html.eex'),
+                extractors: [
+                    {
+                        extractor: TailwindExtractor,
+                        extensions: ['html', 'js', 'eex'],
+                    },
+                ],
+            }),
         ]
     },
     entry: {
@@ -58,10 +60,15 @@ module.exports = (env, options) => ({
                     },
                     'postcss-loader'
                 ]
+            },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/,
+                loader: "file-loader"
             }
         ]
     },
     plugins: [
         new MiniCssExtractPlugin({ filename: './css/app.css' }),
+        new CopyPlugin([{ from: "./static/images", to: "images" }])
     ]
 });

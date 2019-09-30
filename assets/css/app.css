@@ -7,6 +7,20 @@
 
 @tailwind utilities;
 
+@font-face {
+    font-display: auto;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../static/fonts/lato-v16-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Lato Regular'), local('Lato-Regular'),
+    url('../static/fonts/lato-v16-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../static/fonts/lato-v16-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../static/fonts/lato-v16-latin-regular.woff') format('woff'), /* Modern Browsers */
+    url('../static/fonts/lato-v16-latin-regular.ttf') format('truetype') /* Safari, Android, iOS */
+    /*url('../static/fonts/lato-v16-latin-regular.svg#Lato') format('svg'); !* Legacy iOS *!*/
+}
+
 .loading {
 position: relative;
     @apply bg-gray-200
@@ -30,16 +44,14 @@ transform: translateX(100%);
 }
 }
 
-.done{
-    fill:#4299e1;
+
+.step-logo {
+    @apply h-10 w-10;
+    fill:#4ac0f2;
 }
 
 .waiting {
     fill: #718096
-}
-
-.step-logo {
-    @apply h-10 w-10
 }
 
 .credit {

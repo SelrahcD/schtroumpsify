@@ -3,6 +3,7 @@ defmodule Schtroumpsify.FlowRunner do
 
   use GenServer
   alias Schtroumpsify.TweetStatesServer
+  alias Schtroumpsify.Tweet
 
   def start_link(tweet) do
     GenServer.start_link(__MODULE__, tweet)
@@ -20,8 +21,12 @@ defmodule Schtroumpsify.FlowRunner do
 
   @impl true
   def handle_cast({:compute_tweet, tweet}, state) do
-    TweetStatesServer.addTweet(tweet.text)
-    {:noreply, state}
+    TweetStatesServer.addUsing(fn -> Tweet.from(tweet) end)
+    TweetStatesServer.modify(tweet, &Tweet.markAsParsed(&1))
+    TweetStatesServer.modify(tweet, &Tweet.addNewText(&1, "YOLO"))
+    TweetStatesServer.modify(tweet, &Tweet.markAsRetweeted(&1))
+
+    {:stop, :normal, state}
   end
 
 end

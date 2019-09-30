@@ -65,15 +65,31 @@ channel.join()
     .receive("error", resp => { console.log("Unable to join", resp) })
 
 
-channel.on("new_tweet", payload => {
+channel.on("new_tweet", tweet => {
     let template = document.createElement('template');
 
     template.innerHTML = tweetItemTemplate.innerHTML
-        .replace(/{{tweet}}/g, payload.body)
+        .replace(/{{id}}/g, tweet.id)
+        .replace(/{{text}}/g, tweet.text)
 
     tweetContainers.insertBefore(template.content, tweetContainers.firstChild);
 })
 
+channel.on("tweet_schtroumpsified", data => {
+    let tweetContainer = document.getElementById("tweet-" + data.tweet_id);
+    tweetContainer.getElementsByClassName('new-text')[0].innerHTML = data.schtroumpsified_text;
+    tweetContainer.getElementsByClassName('schtroumpsified')[0].classList.toggle('waiting')
+})
+
+channel.on("tweet_parsed", data => {
+    let tweetContainer = document.getElementById("tweet-" + data.tweet_id);
+    tweetContainer.getElementsByClassName('parsed')[0].classList.toggle('waiting')
+})
+
+channel.on("tweet_retweeted", data => {
+    let tweetContainer = document.getElementById("tweet-" + data.tweet_id);
+    tweetContainer.getElementsByClassName('retweeted')[0].classList.toggle('waiting')
+})
 
 export default socket
 

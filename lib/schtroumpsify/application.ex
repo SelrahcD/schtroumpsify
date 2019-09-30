@@ -11,9 +11,9 @@ defmodule Schtroumpsify.Application do
       # Start the endpoint when the application starts
       SchtroumpsifyWeb.Endpoint,
       {Schtroumpsify.TweetStatesServer, []},
-      {Schtroumpsify.TweetListener, []},
-      {SchtroumpsifyWeb.TweetEventListener, []},
-      Schtroumpsify.FlowsSupervisors
+      Schtroumpsify.TweetListener,
+      SchtroumpsifyWeb.TweetEventListener,
+      Schtroumpsify.FlowsSupervisor
       # Starts a worker by calling: Schtroumpsify.Worker.start_link(arg)
       # {Schtroumpsify.Worker, arg},
     ]
