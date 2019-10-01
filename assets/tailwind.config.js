@@ -5,9 +5,17 @@ module.exports = {
       },
     extend: {
         colors: {
-            'schtroumpf-blue-600': '#4ac0f2',
-            'schtroumpf-blue-700': '#1197d4',
-            'schtroumpf-blue-800': '#0d6e9c',
+            'schtroumpf-blue': {
+                100: '#EDF9FE',
+                200: '#D2EFFC',
+                300: '#B7E6FA',
+                400: '#80D3F6',
+                500: '#4AC0F2',
+                600: '#43ADDA',
+                700: '#2C7391',
+                800: '#21566D',
+                900: '#163A49',
+            }
         },
     }
   },
