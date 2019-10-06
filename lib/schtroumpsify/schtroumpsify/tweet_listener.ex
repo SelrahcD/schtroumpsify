@@ -22,15 +22,7 @@ defmodule Schtroumpsify.TweetListener do
 
     Logger.debug("Start listening...")
 
-    stream = ExTwitter.stream_filter([follow: "24744541"], :infinity)
-    IO.inspect(stream)
-        stream
-        |> Stream.map(fn tweet ->
-            Logger.info("New tweet #{tweet.id} #{tweet.text}")
-            tweet
-        end)
-        |> Stream.map(&FlowsSupervisor.startFlow/1)
-        |> Stream.run()
+    listen()
 
     {:noreply, state}
   end
@@ -40,6 +32,19 @@ defmodule Schtroumpsify.TweetListener do
       id: TweetListener,
       start: {__MODULE__, :start_link, []}
     }
+  end
+
+  defp listen do
+
+    ExTwitter.stream_filter([follow: "24744541"], :infinity)
+    |> Stream.map(fn tweet ->
+      Logger.info("New tweet #{tweet.id} #{tweet.text}")
+      tweet
+    end)
+    |> Stream.map(&FlowsSupervisor.startFlow/1)
+    |> Stream.run()
+
+    listen()
   end
 
 end
