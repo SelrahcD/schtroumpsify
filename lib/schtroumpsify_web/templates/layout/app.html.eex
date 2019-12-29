@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="Description" content="Schtroumpsify is a bot translating tweets from french newspaper Le Monde to smurf language.">
-    <title>Schtroumpsify · Phoenix Framework</title>
+    <title>Schtroumpsify</title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
   </head>
   <body class="bg-schtroumpf-blue-100 text-gray-800 font-body flex flex-col h-full border-t-4 border-schtroumpf-blue-600">
