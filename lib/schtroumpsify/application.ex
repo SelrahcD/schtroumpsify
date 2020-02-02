@@ -10,9 +10,8 @@ defmodule Schtroumpsify.Application do
     children = [
       # Start the endpoint when the application starts
       SchtroumpsifyWeb.Endpoint,
-      {Schtroumpsify.TweetStatesServer, []},
+      Schtroumpsify.TweetStatesServer,
       Schtroumpsify.TweetListener,
-      SchtroumpsifyWeb.TweetEventListener,
       Schtroumpsify.FlowsSupervisor
       # Starts a worker by calling: Schtroumpsify.Worker.start_link(arg)
       # {Schtroumpsify.Worker, arg},

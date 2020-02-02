@@ -3,8 +3,14 @@ defmodule Schtroumpsify.Tweet do
 
   alias Schtroumpsify.Tweet
 
-  def from(exTwitterTweet) do
+  def from(exTwitterTweet = %ExTwitter.Model.Tweet{}) do
     tweet = struct(Tweet, Map.from_struct(exTwitterTweet))
+    events = [{:new_tweet, Map.from_struct(tweet)}]
+    {:ok, tweet, events}
+  end
+
+  def from(tweetAsMap = %{}) do
+    tweet = struct(Tweet, tweetAsMap)
     events = [{:new_tweet, Map.from_struct(tweet)}]
     {:ok, tweet, events}
   end

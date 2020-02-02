@@ -1,3 +1,4 @@
+require Logger
 defmodule Schtroumpsify.TweetCollection do
    defstruct tweets: %{}, tweetIds: []
 
@@ -6,26 +7,20 @@ defmodule Schtroumpsify.TweetCollection do
 
    def new(), do: %TweetCollection{}
 
-   def addTweet(tweetCollection, creationFn) do
-     {:ok, tweet, events} = creationFn.()
-     newCollection = %TweetCollection{tweetCollection | tweets: Map.put(tweetCollection.tweets, tweet.id, tweet), tweetIds: tweetCollection.tweetIds ++ [tweet.id]}
-     {:ok, newCollection, events}
-   end
-
    def listAll(tweetCollection) do
       tweetCollection.tweets
    end
 
-   def updateTweet(tweetCollection, tweetId, updateFn) do
-      case Map.fetch(tweetCollection.tweets, tweetId) do
-        :error ->
-          {:ok, tweetCollection, []}
+   def updateTweet(tweetCollection, tweet) do
+     case Map.fetch(tweetCollection.tweets, tweet.id) do
+       :error ->
+         newTweets = %TweetCollection{tweetCollection | tweets: Map.put(tweetCollection.tweets, tweet.id, tweet), tweetIds: tweetCollection.tweetIds ++ [tweet.id]}
+         {:ok, newTweets}
 
-        {:ok, oldTweet} ->
-          {:ok, newTweet, events} = updateFn.(oldTweet)
-          newTweets = Map.put(tweetCollection.tweets, tweetId, newTweet)
-          {:ok, %TweetCollection{tweetCollection | tweets: newTweets}, events}
-      end
+       {:ok, _} ->
+         newTweets = Map.put(tweetCollection.tweets, tweet.id, tweet)
+         {:ok, %TweetCollection{tweetCollection | tweets: newTweets}}
+     end
    end
 
    def take(tweetCollection, amount) do
