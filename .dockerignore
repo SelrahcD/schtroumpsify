@@ -1,0 +1,10 @@
+Dockerfile
+deps
+assets/node_modules
+priv
+.gitignore
+.env
+.env.dist
+Readme.md
+test
+_build
