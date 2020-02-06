@@ -12,7 +12,7 @@ defmodule Schtroumpsify.TweetParser do
     preparedSentence = tweet.text
     |> String.replace("|", "")
 
-    response = HTTPoison.post!("http://localhost:3000", {:form, [sentence: preparedSentence]})
+    response = HTTPoison.post!(Application.fetch_env!(:schtroumpsify, :frmg)[:url], {:form, [sentence: preparedSentence]})
 
     Logger.debug("Parsing result #{tweet.id} #{response.body}")
 
