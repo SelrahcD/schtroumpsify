@@ -1,0 +1,12 @@
+version: '3'
+services:
+  schtroumpsify:
+    image: selrahcd/schtroumpsify:latest
+    ports:
+      - "5000:5000"
+    env_file:
+      .env
+    depends_on:
+    - frmg
+  frmg:
+    image: selrahcd/frmg
