@@ -17,6 +17,41 @@ config :schtroumpsify, SchtroumpsifyWeb.Endpoint,
             # Do not print debug messages in production
 config :logger, level: :info
 
+frmg_parser_url = System.get_env("FRMG_PARSER_URL") ||
+  raise """
+  environment variable FRMG_PARSER_URL is missing.
+  """
+
+config :schtroumpsify, :frmg,
+       url: frmg_parser_url
+
+twitter_consummer_key = System.get_env("TWITTER_CONSUMER_KEY") ||
+  raise """
+  environment variable TWITTER_CONSUMER_KEY is missing.
+  """
+
+twitter_consummer_secret = System.get_env("TWITTER_CONSUMER_SECRET") ||
+  raise """
+  environment variable TWITTER_CONSUMER_SECRET is missing.
+  """
+
+twitter_access_token = System.get_env("TWITTER_ACCESS_TOKEN") ||
+  raise """
+  environment variable TWITTER_ACCESS_TOKEN is missing.
+  """
+
+twitter_access_token_secret = System.get_env("TWITTER_ACCESS_TOKEN_SECRET") ||
+  raise """
+  environment variable TWITTER_ACCESS_TOKEN_SECRET is missing.
+  """
+
+config :extwitter, :oauth, [
+  consumer_key: twitter_consummer_key,
+  consumer_secret: twitter_consummer_secret,
+  access_token: twitter_access_token,
+  access_token_secret: twitter_access_token_secret
+]
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
