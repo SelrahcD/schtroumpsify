@@ -15,7 +15,7 @@
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "babel-loader": "^8.0.0",
-    "copy-webpack-plugin": "^4.6.0",
+    "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^2.1.1",
     "extract-loader": "^3.1.0",
     "file-loader": "^4.2.0",
@@ -25,9 +25,9 @@
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-loader": "^3.0.0",
     "purgecss-webpack-plugin": "^1.5.0",
-    "tailwindcss": "^1.1.2",
-    "terser-webpack-plugin": "^1.1.0",
-    "webpack": "4.4.0",
+    "tailwindcss": "^1.2.0",
+    "terser-webpack-plugin": "^2.3.4",
+    "webpack": "^4.41.5",
     "webpack-cli": "^3.3.2"
   }
 }
