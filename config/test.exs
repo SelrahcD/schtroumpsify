@@ -8,3 +8,13 @@ config :schtroumpsify, SchtroumpsifyWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :schtroumpsify, :frmg,
+       url: "frmg_parser_url"
+
+config :extwitter, :oauth, [
+  consumer_key: "twitter_consummer_key",
+  consumer_secret: "twitter_consummer_secret",
+  access_token: "twitter_access_token",
+  access_token_secret: "twitter_access_token_secret"
+]
