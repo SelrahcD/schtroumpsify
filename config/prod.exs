@@ -10,9 +10,9 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :schtroumpsify, SchtroumpsifyWeb.Endpoint,
-  url: [host: "schtroumpsify.chorip.am", port: 80],
+  url: [host: "http://schtroumpsify.chorip.am", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json",
-  check_origin: false
+  check_origin: ["http://schtroumpsify.chorip.am"]
 
             # Do not print debug messages in production
 config :logger, level: :info
