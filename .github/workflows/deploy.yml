@@ -1,0 +1,33 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+      
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Get the version
+      id: vars
+      run: echo ::set-output name=tag::$(git log -1 --pretty=format:%h)
+    - name: Copy config
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        source: "docker-compose.yaml,docker-compose.production.yaml"
+        target: "/home/schtroumpsify"
+    - name: Deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        script: cd /home/schtroumpsify && SCHTROUMPSIFY_VERSION=${{steps.vars.outputs.tag}} docker-compose -f docker-compose.yaml -f docker-compose.production.yaml up --no-deps -d schtroumpsify
+
