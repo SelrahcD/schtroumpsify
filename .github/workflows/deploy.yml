@@ -29,7 +29,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.KEY }}
-        source: "docker-compose.yaml,docker-compose.production.yaml"
+        source: "infrastructure/*"
         target: "/home/schtroumpsify"
     - name: Deploy
       uses: appleboy/ssh-action@master
