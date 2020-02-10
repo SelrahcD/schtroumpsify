@@ -13,7 +13,7 @@ defmodule SchtroumpsifyWeb.Endpoint do
     at: "/",
     from: :schtroumpsify,
     gzip: true,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    only: ~w(css fonts images js favicon.ico robots.txt .well-known)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
