@@ -4,4 +4,8 @@ services:
   schtroumpsify:
     image: selrahcd/schtroumpsify:${SCHTROUMPSIFY_VERSION}
     ports:
-      - "80:5000"
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/etc/letsencrypt/.well-known:/opt/app/_build/prod/lib/schtroumpsify/priv/static/.well-known"
+      - "/etc/letsencrypt/live/schtroumpsify.chorip.am/:/etc/letsencrypt/live/schtroumpsify.chorip.am/:cached,ro"

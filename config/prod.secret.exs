@@ -12,7 +12,8 @@ secret_key_base =
     """
 
 config :schtroumpsify, SchtroumpsifyWeb.Endpoint,
-  http: [:inet6, port: String.to_integer(System.get_env("PORT") || "4000"), compress: true],
+  http: [:inet6, port: String.to_integer(System.get_env("PORT") || "80"), compress: true],
+  https: [:inet6, port: String.to_integer(System.get_env("PORT_SSL") || "443"), compress: true],
   secret_key_base: secret_key_base
 
 # ## Using releases (Elixir v1.9+)

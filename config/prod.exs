@@ -10,7 +10,14 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :schtroumpsify, SchtroumpsifyWeb.Endpoint,
-  url: [host: "example.com", port: 80],
+  url: [host: "schtroumpsify.chorip.am", port: 443],
+  force_ssl: [hsts: true],
+  https: [
+    port: 443,
+    keyfile:"/etc/letsencrypt/live/schtroumpsify.chorip.am/privkey.pem",
+    cacertfile:"/etc/letsencrypt/live/schtroumpsify.chorip.am/chain.pem",
+    certfile:"/etc/letsencrypt/live/schtroumpsify.chorip.am/cert.pem"
+  ],
   cache_static_manifest: "priv/static/cache_manifest.json",
   check_origin: false
 
