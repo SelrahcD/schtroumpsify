@@ -11,6 +11,10 @@ defmodule Schtroumpsify.TweetParser do
 
     preparedSentence = tweet.text
     |> String.replace("|", "")
+    |> String.replace("~r/https?:\/\/[^\s]+/", "")
+
+    Logger.info("Prepared sentend #{tweet.id} #{preparedSentence}")
+
 
     response = HTTPoison.post!(Application.fetch_env!(:schtroumpsify, :frmg)[:url], {:form, [sentence: preparedSentence]}, [recv_timeout: 30000])
 
