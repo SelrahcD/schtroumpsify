@@ -12,9 +12,9 @@ defmodule Schtroumpsify.TweetParser do
     preparedSentence = tweet.text
     |> String.replace("|", "")
 
-    response = HTTPoison.post!(Application.fetch_env!(:schtroumpsify, :frmg)[:url], {:form, [sentence: preparedSentence]}, [recv_timeout: 10000])
+    response = HTTPoison.post!(Application.fetch_env!(:schtroumpsify, :frmg)[:url], {:form, [sentence: preparedSentence]}, [recv_timeout: 30000])
 
-    Logger.debug("Parsing result #{tweet.id} #{response.body}")
+    Logger.info("Parsing result #{tweet.id} #{response.body}")
 
     flow
     |> Map.put(:parsing, Poison.decode!(response.body)["data"])
