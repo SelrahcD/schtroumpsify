@@ -5,6 +5,7 @@ defmodule Schtroumpsify.Tweet do
 
   def from(exTwitterTweet = %ExTwitter.Model.Tweet{}) do
     tweet = struct(Tweet, Map.from_struct(exTwitterTweet))
+    tweet = %{tweet | text: exTwitterTweet.full_text}
     events = [{:new_tweet, Map.from_struct(tweet)}]
     {:ok, tweet, events}
   end

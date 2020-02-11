@@ -39,7 +39,7 @@ defmodule Schtroumpsify.TweetListener do
     ExTwitter.stream_filter([follow: "24744541"], :infinity)
     |> Stream.filter(fn tweet -> tweet.user.id == 24744541 end)
     |> Stream.map(fn tweet ->
-      Logger.info("New tweet #{tweet.id} #{tweet.text}")
+      Logger.info("New tweet #{tweet.id} #{tweet.full_text}")
       tweet
     end)
     |> Stream.map(&FlowsSupervisor.startFlow/1)
