@@ -37,7 +37,7 @@ defmodule Schtroumpsify.TweetListener do
   defp listen do
 
     ExTwitter.stream_filter([follow: "24744541"], :infinity)
-    |> Stream.filter(fn tweet -> tweet.user.id == 24744541 end)
+    |> Stream.filter(fn tweet -> tweet.user.id == 24744541 && !is_nil(tweet.retweeted_status) end)
     |> Stream.map(fn tweet ->
       Logger.info("New tweet #{tweet.id} #{tweet.full_text}")
       tweet
