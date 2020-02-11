@@ -16,8 +16,7 @@ defmodule Schtroumpsify.TweetParser do
 
     Logger.info("Prepared sentence #{tweet.id} #{preparedSentence}")
 
-
-    response = HTTPoison.post!(Application.fetch_env!(:schtroumpsify, :frmg)[:url], {:form, [sentence: preparedSentence]}, [timeout: 10000, recv_timeout: 30000])
+    response = HTTPoison.post!(Application.fetch_env!(:schtroumpsify, :frmg)[:url], {:form, [sentence: preparedSentence]}, [timeout: 10000, recv_timeout: :infinity])
 
     Logger.info("Parsing result #{tweet.id} #{response.body}")
 
