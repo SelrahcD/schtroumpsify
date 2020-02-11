@@ -6,7 +6,11 @@ defmodule Schtroumpsify.Tweet do
   def from(exTwitterTweet = %ExTwitter.Model.Tweet{}) do
     tweet = struct(Tweet, Map.from_struct(exTwitterTweet))
 
-    text = exTwitterTweet.extended_tweet.full_text
+    text = if !is_nil(exTwitterTweet.extended_tweet) do
+        exTwitterTweet.extended_tweet.full_text
+      else
+        exTwitterTweet.text
+      end
 
     tweet = %{tweet | text: text}
 
