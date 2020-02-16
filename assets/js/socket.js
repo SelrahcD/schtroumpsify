@@ -66,6 +66,11 @@ channel.join()
 
 
 channel.on("new_tweet", tweet => {
+
+    if(document.getElementById("tweet-" + tweet.id)) {
+        return;
+    }
+
     let template = document.createElement('template');
 
     template.innerHTML = tweetItemTemplate.innerHTML
