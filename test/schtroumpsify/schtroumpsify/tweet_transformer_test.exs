@@ -255,7 +255,7 @@ defmodule Schtroumpsify.TweetTransformerTest do
     {"verbe au participe passé masculin pluriel", %{"cpos" => "VPP", "mstag" => %{"g" => "m", "n" => "p"}}, "schtroumpfés"},
     {"verbe au participe passé feminin pluriel", %{"cpos" => "VPP", "mstag" => %{"g" => "f", "n" => "p"}}, "schtroumpfées"},
     {"verbe à l'infinif", %{"cpos" => "VINF"}, "schtroumpfer"},
-    {"adverbe", %{"cpos" => "ADV"}, "schtroumpfement"},
+    {"adverbe terminant par ement", %{"cpos" => "ADV", "form" => "tellement"}, "schtroumpfement"},
 
     {"verbe à l'indicatif présent, 1ere personne du singulier", %{"cpos" => "V", "mstag" => %{"m" => "ind", "t" => "pst", "n" => "s", "p" => "1"}}, "schtroumpfe"},
     {"verbe à l'indicatif présent, 2eme personne du singulier", %{"cpos" => "V", "mstag" => %{"m" => "ind", "t" => "pst", "n" => "s", "p" => "2"}}, "schtroumpfes"},
@@ -306,6 +306,10 @@ defmodule Schtroumpsify.TweetTransformerTest do
       assert TweetTransformer.transform_token!(@token) === {:ok, @expected_schtroumpf_equivalent}
     end
 
+  end
+
+  test "doesnt transforms an adverb token not ending with ement"do
+    assert TweetTransformer.transform_token!(%{"cpos" => "ADV", "form" => "pas"}) === {:error, :do_not_convert_adverbe_not_ending_with_ement}
   end
 
   test "doesnt replace auxiliaires de temps" do

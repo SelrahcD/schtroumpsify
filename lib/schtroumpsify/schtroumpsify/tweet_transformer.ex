@@ -36,7 +36,7 @@ defmodule Schtroumpsify.TweetTransformer do
       %{"lemma" => "_URL"} -> {:error, :cant_convert_url}
       %{"cpos" => "NC", "mstag" => %{"n" => "p"}} -> {:ok, "schtroumpfs"}
       %{"cpos" => "NC"} -> {:ok, "schtroumpf"}
-      %{"cpos" => "ADV"} -> {:ok, "schtroumpfement"}
+      %{"cpos" => "ADV", "form" => form} -> if String.ends_with?(form, "ement") do {:ok, "schtroumpfement"} else {:error, :do_not_convert_adverbe_not_ending_with_ement} end
       %{"cpos" => "ADJ", "mstag" => %{"n" => "p"}} -> {:ok, "schtroumpfs"}
       %{"cpos" => "ADJ"} -> {:ok, "schtroumpf"}
 
