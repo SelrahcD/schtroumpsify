@@ -1,4 +1,4 @@
-FROM bitwalker/alpine-elixir-phoenix:latest AS phx-builder
+FROM bitwalker/alpine-elixir-phoenix:1.9.4 AS phx-builder
 
 EXPOSE 80
 EXPOSE 443
@@ -42,7 +42,7 @@ RUN cd assets/ && \
     cd - && \
     mix deps.get && mix compile && mix phx.digest
 
-FROM bitwalker/alpine-elixir:latest AS prod
+FROM bitwalker/alpine-elixir:1.9.4 AS prod
 
 EXPOSE 80
 EXPOSE 443
