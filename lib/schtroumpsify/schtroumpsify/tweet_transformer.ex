@@ -39,11 +39,13 @@ defmodule Schtroumpsify.TweetTransformer do
       %{"cpos" => "ADV"} -> {:ok, "schtroumpfement"}
       %{"cpos" => "ADJ", "mstag" => %{"n" => "p"}} -> {:ok, "schtroumpfs"}
       %{"cpos" => "ADJ"} -> {:ok, "schtroumpf"}
+
       %{"cpos" => "VPP", "mstag" => %{"g" => "f", "n" => "p"}} -> {:ok, "schtroumpfées"}
       %{"cpos" => "VPP", "mstag" => %{"g" => "f", "n" => "s"}} -> {:ok, "schtroumpfée"}
       %{"cpos" => "VPP", "mstag" => %{"g" => "m", "n" => "p"}} -> {:ok, "schtroumpfés"}
       %{"cpos" => "VPP", "mstag" => %{"g" => "m", "n" => "s"}} -> {:ok, "schtroumpfé"}
 
+      %{"cpos" => "V", "deprel" => "aux_tps"} -> {:error, :do_not_convert_aux_temps}
       %{"cpos" => "V", "mstag" => %{"m" => "ind", "t" => "pst", "n" => "s", "p" => "1"}} -> {:ok, "schtroumpfe"}
       %{"cpos" => "V", "mstag" => %{"m" => "ind", "t" => "pst", "n" => "s", "p" => "2"}} -> {:ok, "schtroumpfes"}
       %{"cpos" => "V", "mstag" => %{"m" => "ind", "t" => "pst", "n" => "s", "p" => "3"}} -> {:ok, "schtroumpfe"}

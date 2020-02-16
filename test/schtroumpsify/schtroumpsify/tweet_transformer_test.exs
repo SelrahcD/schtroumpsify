@@ -308,6 +308,76 @@ defmodule Schtroumpsify.TweetTransformerTest do
 
   end
 
+  test "doesnt replace auxiliaires de temps" do
+    {:ok, originalTweet, _} = Tweet.from(%{id: @tweetId, text: "Il a mangé."})
+
+    parsing = %{
+      "1" => %{
+        "cpos" => "CLS",
+        "deprel" => "suj",
+        "form" => "Il",
+        "head" => "2",
+        "id" => "1",
+        "lemma" => "il",
+        "mstag" => %{"g" => "m", "n" => "s", "p" => "3", "s" => "suj"},
+        "pos" => "CL"
+      },
+      "2" => %{
+        "cpos" => "V",
+        "deprel" => "aux_tps",
+        "form" => "a",
+        "head" => "0",
+        "id" => "2",
+        "lemma" => "avoir",
+        "mstag" => %{
+           "m" => "ind",
+           "n" => "s",
+           "p" => "3",
+           "t"=>"pst"
+          },
+        "pos" => "V"
+      },
+      "3" => %{
+       "cpos" => "VPP",
+       "deprel" => "root",
+       "form" => "mangé",
+       "head" => "0",
+       "id" => "2",
+       "lemma" => "manger",
+       "mstag" => %{
+        "g" => "m",
+        "n"=>"s"
+         }
+       },
+      "4" => %{
+        "cpos" => "PONCT",
+        "deprel" => "ponct",
+        "form" => ".",
+        "head" => "2",
+        "id" => "5",
+        "lemma" => ".",
+        "mstag" => %{},
+        "pos" => "PONCT"
+      }
+    }
+
+    %{tweet: tweet, events: events} = TweetTransformer.transform(%{tweet: originalTweet, parsing: parsing})
+
+    result = %{tweet: tweet, events: events}
+
+    expectedTweet = originalTweet
+                     |> Map.put(:schtroumpsified_text, "Il a schtroumpfé.")
+                     |> Map.put(:is_schtroumpsified, true)
+
+
+    expectedEvents =[{:tweet_schtroumpsified, %{tweet_id: @tweetId, schtroumpsified_text: "Il a schtroumpfé." }}]
+
+    expectedResult = %{tweet: expectedTweet, events: expectedEvents}
+
+    assert result == expectedResult
+
+  end
+
   defp il_mange_une_pomme_parse_result do
     %{
       "1" => %{
