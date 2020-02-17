@@ -10,7 +10,7 @@ defmodule Schtroumpsify.TweetParser do
     Logger.debug("Parsing #{tweet.id} #{tweet.text}")
 
     preparedSentence = tweet.text
-    |> String.replace(~r/[[:alnum:]]+ ?| ?/, "")
+    |> String.replace("|", "")
     |> String.replace(~r( ?https?://[^\s]+), "")
     |> String.replace(~r/ ?\[.+\]/, "")
     |> String.replace(~r/\p{So}/u, "")
