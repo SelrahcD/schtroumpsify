@@ -3,7 +3,6 @@ defmodule Schtroumpsify.TweetCollection do
    defstruct tweets: %{}, tweetIds: []
 
    alias Schtroumpsify.TweetCollection
-   alias Schtroumpsify.Tweet
 
    def new(), do: %TweetCollection{}
 
