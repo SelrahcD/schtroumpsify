@@ -312,6 +312,7 @@ defmodule Schtroumpsify.TweetTransformerTest do
     assert TweetTransformer.transform_token!(%{"cpos" => "ADV", "form" => "pas"}) === {:error, :do_not_convert_adverbe_not_ending_with_ement}
   end
 
+
   test "doesnt replace auxiliaires de temps" do
     {:ok, originalTweet, _} = Tweet.from(%{id: @tweetId, text: "Il a mangé."})
 
@@ -375,6 +376,76 @@ defmodule Schtroumpsify.TweetTransformerTest do
 
 
     expectedEvents =[{:tweet_schtroumpsified, %{tweet_id: @tweetId, schtroumpsified_text: "Il a schtroumpfé." }}]
+
+    expectedResult = %{tweet: expectedTweet, events: expectedEvents}
+
+    assert result == expectedResult
+
+  end
+
+  test "doesnt replace auxiliaires de temps passé" do
+    {:ok, originalTweet, _} = Tweet.from(%{id: @tweetId, text: "Il est mangé."})
+
+    parsing = %{
+      "1" => %{
+        "cpos" => "CLS",
+        "deprel" => "suj",
+        "form" => "Il",
+        "head" => "2",
+        "id" => "1",
+        "lemma" => "il",
+        "mstag" => %{"g" => "m", "n" => "s", "p" => "3", "s" => "suj"},
+        "pos" => "CL"
+      },
+      "2" => %{
+        "cpos" => "V",
+        "deprel" => "aux_pass",
+        "form" => "est",
+        "head" => "0",
+        "id" => "2",
+        "lemma" => "être",
+        "mstag" => %{
+          "m" => "ind",
+          "n" => "s",
+          "p" => "3",
+          "t"=>"pst"
+        },
+        "pos" => "V"
+      },
+      "3" => %{
+        "cpos" => "VPP",
+        "deprel" => "root",
+        "form" => "mangé",
+        "head" => "0",
+        "id" => "2",
+        "lemma" => "manger",
+        "mstag" => %{
+          "g" => "m",
+          "n"=>"s"
+        }
+      },
+      "4" => %{
+        "cpos" => "PONCT",
+        "deprel" => "ponct",
+        "form" => ".",
+        "head" => "2",
+        "id" => "5",
+        "lemma" => ".",
+        "mstag" => %{},
+        "pos" => "PONCT"
+      }
+    }
+
+    %{tweet: tweet, events: events} = TweetTransformer.transform(%{tweet: originalTweet, parsing: parsing})
+
+    result = %{tweet: tweet, events: events}
+
+    expectedTweet = originalTweet
+                    |> Map.put(:schtroumpsified_text, "Il est schtroumpfé.")
+                    |> Map.put(:is_schtroumpsified, true)
+
+
+    expectedEvents =[{:tweet_schtroumpsified, %{tweet_id: @tweetId, schtroumpsified_text: "Il est schtroumpfé." }}]
 
     expectedResult = %{tweet: expectedTweet, events: expectedEvents}
 

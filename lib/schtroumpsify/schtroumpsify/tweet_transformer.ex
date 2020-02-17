@@ -46,6 +46,7 @@ defmodule Schtroumpsify.TweetTransformer do
       %{"cpos" => "VPP", "mstag" => %{"g" => "m", "n" => "s"}} -> {:ok, "schtroumpfé"}
 
       %{"cpos" => "V", "deprel" => "aux_tps"} -> {:error, :do_not_convert_aux_temps}
+      %{"cpos" => "V", "deprel" => "aux_pass"} -> {:error, :do_not_convert_aux_pass}
       %{"cpos" => "V", "mstag" => %{"m" => "ind", "t" => "pst", "n" => "s", "p" => "1"}} -> {:ok, "schtroumpfe"}
       %{"cpos" => "V", "mstag" => %{"m" => "ind", "t" => "pst", "n" => "s", "p" => "2"}} -> {:ok, "schtroumpfes"}
       %{"cpos" => "V", "mstag" => %{"m" => "ind", "t" => "pst", "n" => "s", "p" => "3"}} -> {:ok, "schtroumpfe"}
