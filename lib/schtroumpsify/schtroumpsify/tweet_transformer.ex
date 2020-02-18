@@ -103,6 +103,7 @@ defmodule Schtroumpsify.TweetTransformer do
 
   defp replace(subject, pattern, replacement) do
     subject
+    |> String.replace(String.upcase(pattern), String.upcase(replacement))
     |> String.replace(String.capitalize(pattern), String.capitalize(replacement))
     |> String.replace(pattern, replacement)
   end

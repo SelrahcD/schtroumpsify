@@ -232,14 +232,19 @@ defmodule Schtroumpsify.TweetTransformerTest do
       {:ok, tweet_lower_case, _} = Tweet.from(%{text: "minuscule"})
       transformation_lower_case = {:ok, %{"form" => "minuscule"}, "schtroumpf"}
 
-      {:ok, tweet_upper_case, _} = Tweet.from(%{text: "Majuscule"})
-      transformation_upper_case = {:ok, %{"form" => "Majuscule"}, "schtroumpf"}
+      {:ok, tweet_capitalized, _} = Tweet.from(%{text: "Majuscule"})
+      transformation_capitalized = {:ok, %{"form" => "Majuscule"}, "schtroumpf"}
+
+      {:ok, tweet_upper_case, _} = Tweet.from(%{text: "MAJUSCULE"})
+      transformation_upper_case = {:ok, %{"form" => "MAJUSCULE"}, "schtroumpf"}
 
       new_text_lower_case = TweetTransformer.transform_text(transformation_lower_case, tweet_lower_case)
+      new_text_capitalize = TweetTransformer.transform_text(transformation_capitalized, tweet_capitalized)
       new_text_upper_case = TweetTransformer.transform_text(transformation_upper_case, tweet_upper_case)
 
       assert new_text_lower_case == "schtroumpf"
-      assert new_text_upper_case == "Schtroumpf"
+      assert new_text_capitalize == "Schtroumpf"
+      assert new_text_upper_case == "SCHTROUMPF"
     end
   end
 
