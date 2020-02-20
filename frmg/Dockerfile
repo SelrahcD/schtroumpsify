@@ -33,4 +33,7 @@ EXPOSE 9000
 
 RUN chown www-data /root && mkdir /var/www && chown www-data /var/www
 
+RUN sed -i "s/max_execution_time = 30/max_execution_time = 60/" /etc/php5/fpm/php.ini
+
+
 COPY ./index.php /var/html/index.php
