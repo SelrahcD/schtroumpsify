@@ -8,6 +8,7 @@ defmodule Schtroumpsify.FlowRunner do
   alias Schtroumpsify.Tweet
   alias Schtroumpsify.TweetParser
   alias Schtroumpsify.TweetTransformer
+  alias Schtroumpsify.TweetPublisher
 
   def start_link(tweet) do
     GenServer.start_link(__MODULE__, tweet)
@@ -30,7 +31,7 @@ defmodule Schtroumpsify.FlowRunner do
     |> (&save_and_dispatch_event(add_to_flow(&1,Tweet.from(tweet)))).()
     |> (&save_and_dispatch_event(TweetParser.parse(&1))).()
     |> (&save_and_dispatch_event(TweetTransformer.transform(&1))).()
-#    |> (&save_and_dispatch_event(Tweet.markAsRetweeted(&1))).()
+    |> (&save_and_dispatch_event(TweetPublisher.publish(&1))).()
 
     {:stop, :normal, state}
   end
