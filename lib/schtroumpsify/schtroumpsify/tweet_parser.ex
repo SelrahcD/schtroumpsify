@@ -14,6 +14,8 @@ defmodule Schtroumpsify.TweetParser do
     |> String.replace(~r( ?https?://[^\s]+), "")
     |> String.replace(~r/ ?\[.+\]/, "")
     |> String.replace(~r/\p{So}/u, "")
+    |> String.replace(~r/'([[:alpha:]])/u, "’\\1")
+    |> String.replace(~r/#([[:alpha:]])/u, "\\1")
 
     Logger.info("Prepared sentence #{tweet.id} #{preparedSentence}")
 
