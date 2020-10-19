@@ -6,9 +6,13 @@ services:
       .env
     depends_on:
       - frmg
+    networks:
+      - default
 
   frmg_back:
       image: selrahcd/frmg:latest
+      networks:
+        - default
 
   frmg:
       image: nginx:1.17.1-alpine
@@ -17,3 +21,5 @@ services:
           - ./fastcgi_params:/etc/nginx/conf.d/fastcgi_params
       depends_on:
         - frmg_back
+      networks:
+        - default

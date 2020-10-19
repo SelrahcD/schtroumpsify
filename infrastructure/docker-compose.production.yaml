@@ -3,5 +3,10 @@ version: '3'
 services:
   schtroumpsify:
     image: selrahcd/schtroumpsify:${SCHTROUMPSIFY_VERSION}
-    ports:
-      - "5001:5000"
+    networks:
+      - default
+      - proxy
+
+networks:
+  proxy:
+    external: true
