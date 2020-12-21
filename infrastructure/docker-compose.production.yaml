@@ -6,6 +6,13 @@ services:
     networks:
       - default
       - proxy
+    restart: always
+
+  frmg_back:
+    restart: always
+
+  frmg:
+    restart: always
 
 networks:
   proxy:
