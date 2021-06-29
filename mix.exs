@@ -33,16 +33,16 @@ defmodule Schtroumpsify.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.9"},
-      {:phoenix_pubsub, "~> 1.1"},
+      {:phoenix, "~> 1.5.9"},
+      {:phoenix_pubsub, "~> 2.0"},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"},
+      {:plug_cowboy, "~> 2.1"},
       {:gen_stage, "~> 0.14"},
       {:oauther, "~> 1.1"},
-      {:extwitter, "~> 0.9.5"},
+      {:extwitter, "~> 0.12"},
       {:httpoison, "~> 1.6"}
     ]
   end
