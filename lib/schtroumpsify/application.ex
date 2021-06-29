@@ -12,7 +12,8 @@ defmodule Schtroumpsify.Application do
       SchtroumpsifyWeb.Endpoint,
       Schtroumpsify.TweetStatesServer,
       Schtroumpsify.TweetListener,
-      Schtroumpsify.FlowsSupervisor
+      Schtroumpsify.FlowsSupervisor,
+      {Phoenix.PubSub, name: Schtroumpsify.PubSub}
       # Starts a worker by calling: Schtroumpsify.Worker.start_link(arg)
       # {Schtroumpsify.Worker, arg},
     ]
