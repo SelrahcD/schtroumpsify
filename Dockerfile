@@ -1,4 +1,4 @@
-FROM bitwalker/alpine-elixir-phoenix:1.11.4 AS phx-builder
+FROM bitwalker/alpine-elixir-phoenix:1.9.4 AS phx-builder
 
 ENV PORT=5000
 ENV MIX_ENV=prod
