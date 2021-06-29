@@ -12,7 +12,7 @@ config :schtroumpsify, SchtroumpsifyWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "hpuYZJ8AOnzYjw2LLKAuPvlB3MI3SQ9U2HQ9uDxJG+ogF7JLU8pryVElUsV+d8Zj",
   render_errors: [view: SchtroumpsifyWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Schtroumpsify.PubSub, adapter: Phoenix.PubSub.PG2]
+  pubsub_server: Schtroumpsify.PubSub
 
 # Configures Elixir's Logger
 config :logger, :console,
