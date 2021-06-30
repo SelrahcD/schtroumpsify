@@ -1,4 +1,5 @@
-FROM bitwalker/alpine-elixir-phoenix:1.11.4 AS phx-builder
+FROM bitwalker/alpine-elixir-phoenix:1.11.4 AS elixir
+FROM elixir AS phx-builder
 
 ENV PORT=5000
 ENV MIX_ENV=prod
@@ -39,7 +40,7 @@ RUN cd assets/ && \
     cd - && \
     mix deps.get && mix compile && mix phx.digest
 
-FROM bitwalker/alpine-elixir:1.11.4 AS prod
+FROM elixir AS prod
 
 EXPOSE 5000
 ENV PORT=5000
