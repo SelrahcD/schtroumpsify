@@ -18,7 +18,8 @@ defmodule SchtroumpsifyWeb.ConnCase do
   using do
     quote do
       # Import conveniences for testing with connections
-      use Phoenix.ConnTest
+      import Plug.Conn
+      import Phoenix.ConnTest
       alias SchtroumpsifyWeb.Router.Helpers, as: Routes
 
       # The default endpoint for testing
@@ -26,7 +27,7 @@ defmodule SchtroumpsifyWeb.ConnCase do
     end
   end
 
-  setup tags do
+  setup _tags do
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end
