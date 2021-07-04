@@ -16,22 +16,21 @@ defmodule Schtroumpsify.FlowRunner do
 
   @impl true
   def init(tweet) do
-    compute_tweet(tweet)
-    {:ok, %{tweet: tweet}}
-  end
-
-  def compute_tweet(tweet) do
-    GenServer.cast(self(), {:compute_tweet, tweet})
+    {:ok, nil, {:continue, {:compute_tweet, tweet}}}
   end
 
   @impl true
-  def handle_cast({:compute_tweet, tweet}, state) do
+  def handle_continue({:compute_tweet, tweet}, state) do
 
     %{events: [], tweet: nil}
-    |> (&save_and_dispatch_event(add_to_flow(&1,Tweet.from(tweet)))).()
-    |> (&save_and_dispatch_event(TweetParser.parse(&1))).()
-    |> (&save_and_dispatch_event(TweetTransformer.transform(&1))).()
-    |> (&save_and_dispatch_event(TweetPublisher.publish(&1))).()
+    |> add_to_flow(Tweet.from(tweet))
+    |> save_and_dispatch_event()
+    |> TweetParser.parse()
+    |> save_and_dispatch_event()
+    |> TweetTransformer.transform()
+    |> save_and_dispatch_event()
+    |> TweetPublisher.publish()
+    |> save_and_dispatch_event()
 
     {:stop, :normal, state}
   end
