@@ -10,31 +10,12 @@ defmodule Schtroumpsify.TweetListener do
   end
 
   def init(_printer_pid) do
-    startListening()
-    {:ok, nil}
+    {:ok, nil, {:continue, :listen}}
   end
 
-  def startListening() do
-    GenServer.cast(self(), :start_listening)
-  end
-
-  def handle_cast(:start_listening, state) do
+  def handle_continue(:listen, state) do
 
     Logger.debug("Start listening...")
-
-    listen()
-
-    {:noreply, state}
-  end
-
-  def child_spec(_arg) do
-    %{
-      id: TweetListener,
-      start: {__MODULE__, :start_link, []}
-    }
-  end
-
-  defp listen do
 
     ExTwitter.stream_filter([follow: "24744541"], :infinity)
     |> Stream.filter(fn tweet -> tweet.user.id == 24744541 && is_nil(tweet.retweeted_status) end)
@@ -45,7 +26,15 @@ defmodule Schtroumpsify.TweetListener do
     |> Stream.map(&FlowsSupervisor.startFlow/1)
     |> Stream.run()
 
-    listen()
+
+    {:noreply, state, {:continue, :listen}}
+  end
+
+  def child_spec(_arg) do
+    %{
+      id: TweetListener,
+      start: {__MODULE__, :start_link, []}
+    }
   end
 
 end

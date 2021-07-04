@@ -5,7 +5,7 @@ defmodule Schtroumpsify.MixProject do
     [
       app: :schtroumpsify,
       version: "0.1.0",
-      elixir: "~> 1.5",
+      elixir: "1.11.4",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -43,7 +43,10 @@ defmodule Schtroumpsify.MixProject do
       {:gen_stage, "~> 0.14"},
       {:oauther, "~> 1.1"},
       {:extwitter, "~> 0.12"},
-      {:httpoison, "~> 1.6"}
+      {:httpoison, "~> 1.6"},
+      {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
+      {:poison, "~> 3.1"}
     ]
   end
 
