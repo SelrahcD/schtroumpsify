@@ -21,7 +21,13 @@ defmodule Schtroumpsify.Tweet do
 
   @spec from(ExTwitter.Model.Tweet.t) :: result
   def from(exTwitterTweet = %ExTwitter.Model.Tweet{}) do
-    tweet = %Tweet{id: exTwitterTweet.id, text: exTwitterTweet.raw_data.text}
+
+    text = case exTwitterTweet.raw_data do
+      %{extended_tweet: extended_tweet} -> extended_tweet.full_text
+      _ -> exTwitterTweet.raw_data.text
+    end
+
+    tweet = %Tweet{id: exTwitterTweet.id, text: text}
 
     events = [{:new_tweet, Map.from_struct(tweet)}]
     {:ok, tweet, events}
