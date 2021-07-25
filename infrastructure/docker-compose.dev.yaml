@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+
+  frmg:
+    ports:
+    - 3000:80
