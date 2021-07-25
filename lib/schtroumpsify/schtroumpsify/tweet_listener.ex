@@ -15,12 +15,13 @@ defmodule Schtroumpsify.TweetListener do
 
   def handle_continue(:listen, state) do
 
+
     Logger.debug("Start listening...")
 
-    ExTwitter.stream_filter([follow: "24744541"], :infinity)
+    ExTwitter.stream_filter([follow: "24744541", tweet_mode: :extended], :infinity)
     |> Stream.filter(fn tweet -> tweet.user.id == 24744541 && is_nil(tweet.retweeted_status) end)
     |> Stream.map(fn tweet ->
-      Logger.info("New tweet #{tweet.id} #{tweet.full_text}")
+      Logger.info("New tweet #{tweet.id} #{tweet.text}")
       tweet
     end)
     |> Stream.map(&FlowsSupervisor.startFlow/1)
