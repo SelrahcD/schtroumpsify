@@ -31,7 +31,15 @@ defmodule Schtroumpsify.TweetTransformer do
       |> replace("l’" <> transformation, "le " <> transformation)
   end
 
+
   def transform_token!(token) do
+    case Float.parse(token["form"]) do
+      {_, _} -> {:error, :do_not_transform_number}
+      _ -> transform_accepted_token!(token)
+    end
+  end
+
+  def transform_accepted_token!(token) do
     case token do
       %{"lemma" => "_URL"} -> {:error, :cant_convert_url}
       %{"cpos" => "NC", "mstag" => %{"n" => "p"}} -> {:ok, "schtroumpfs"}

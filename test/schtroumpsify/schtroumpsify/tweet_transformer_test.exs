@@ -308,13 +308,17 @@ defmodule Schtroumpsify.TweetTransformerTest do
     @name name
 
     test "transforms a " <> @name <> " token to its schtroumpf equivalent \"" <> @expected_schtroumpf_equivalent <> "\""do
-      assert TweetTransformer.transform_token!(@token) === {:ok, @expected_schtroumpf_equivalent}
+      assert TweetTransformer.transform_token!(build_token(@token)) === {:ok, @expected_schtroumpf_equivalent}
     end
 
   end
 
   test "doesnt transforms an adverb token not ending with ement"do
     assert TweetTransformer.transform_token!(%{"cpos" => "ADV", "form" => "pas"}) === {:error, :do_not_convert_adverbe_not_ending_with_ement}
+  end
+
+  test "doesnt transforms a number" do
+    assert TweetTransformer.transform_token!(%{"form" => "2022"}) === {:error, :do_not_transform_number}
   end
 
 
@@ -517,6 +521,11 @@ defmodule Schtroumpsify.TweetTransformerTest do
         "pos" => "PONCT"
       }
     }
+  end
+
+  defp build_token(token) do
+    %{"form" => ""}
+    |> Map.merge(token)
   end
 
 end
