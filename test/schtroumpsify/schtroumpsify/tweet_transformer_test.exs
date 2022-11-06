@@ -127,6 +127,26 @@ defmodule Schtroumpsify.TweetTransformerTest do
       assert new_text == "De schtroumpf"
     end
 
+    test "replaces previous \"c’\" with \"ce\"" do
+
+      {:ok, tweet, _} = Tweet.from(%{text: "c’était"})
+      transformation = {:ok, %{"form" => "était"}, "schtroumpfait"}
+
+      new_text = TweetTransformer.transform_text(transformation, tweet)
+
+      assert new_text == "ce schtroumpfait"
+    end
+
+    test "replaces previous \"C’\" with \"ce\"" do
+
+      {:ok, tweet, _} = Tweet.from(%{text: "C’était"})
+      transformation = {:ok, %{"form" => "était"}, "schtroumpfait"}
+
+      new_text = TweetTransformer.transform_text(transformation, tweet)
+
+      assert new_text == "Ce schtroumpfait"
+    end
+
     test "replaces previous \"de l’\" with \"du\"" do
 
       {:ok, tweet, _} = Tweet.from(%{text: "de l’eau"})

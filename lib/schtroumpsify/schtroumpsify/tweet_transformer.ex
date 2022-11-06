@@ -28,6 +28,7 @@ defmodule Schtroumpsify.TweetTransformer do
       |> replace("j’" <> transformation, "je " <> transformation)
       |> replace("n’" <> transformation, "ne " <> transformation)
       |> replace("d’" <> transformation, "de " <> transformation)
+      |> replace("c’" <> transformation, "ce " <> transformation)
       |> replace("l’" <> transformation, "le " <> transformation)
   end
 
